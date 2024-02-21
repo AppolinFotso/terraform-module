@@ -30,3 +30,14 @@ resource "aws_instance" "app_server" {
   }
 }
 
+module "website_s3_bucket" {
+  source = "./modules/aws-s3-static-website-bucket"
+
+  bucket_name = "appolin-terraform-s3"
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+}
+
