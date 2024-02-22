@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: test docker
+name: test docker and terraform
 
 # Controls when the workflow will run
 on:
@@ -29,5 +29,7 @@ jobs:
         run: echo Hello, world!
       - name: test docker
         run: docker -v
+      - name: test terraform
+        run: terraform -version
 
      
