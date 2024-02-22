@@ -28,7 +28,7 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
       - name: test docker terraform and node versions
-        run: 
+        run: |
              docker -v
              terraform -version
              node -v
