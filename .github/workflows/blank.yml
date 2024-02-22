@@ -32,5 +32,6 @@ jobs:
              docker -v
              terraform -version
              node -v
+             aws --version
 
      
