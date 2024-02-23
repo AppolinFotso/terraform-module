@@ -26,12 +26,29 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: echo Hello, world! > output.log
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-log-file
+          path: output.log
       - name: test docker terraform and node versions
         run: |
              docker -v
              terraform -version
              node -v
              aws --version
+
+  example:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+       - name: upload artifact
+         uses: actions/download-artifact@v4
+         with:
+          name: my-log-file
+       - name: list content of working directory
+         run: ls
+          
 
      
