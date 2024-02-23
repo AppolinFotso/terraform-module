@@ -1,9 +1,9 @@
 terraform {
 
   # cloud {
-  #   organization = "organisation-name"
+  #   organization = "**********"
   #   workspaces {
-  #     name = "workspace-name"
+  #     name = "********"
   #   }
   # }
 
@@ -21,19 +21,19 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-0e5f882be1900e43b"
-  instance_type = "t2.micro"
+module "ec2_instance" {
+  source = "./modules/aws-ec2-instance"
+  instance_name = "my-hotel-server"
+}
 
-  tags = {
-    Name = var.instance_name
-  }
+module "db" {
+  source = "./modules/aws-rds"
 }
 
 module "website_s3_bucket" {
   source = "./modules/aws-s3-static-website-bucket"
 
-  bucket_name = "appolin-terraform-s3"
+  bucket_name = "my-hotel-client"
 
   tags = {
     Terraform   = "true"
